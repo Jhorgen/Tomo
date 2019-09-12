@@ -13,16 +13,31 @@ class Game extends React.Component {
     this.state = {
       hunger: 50,
       happiness: 50,
-      health: 100
+      health: 50
 
     };
 
     this.handleFeed = this.handleFeed.bind(this);
     this.handlePlay = this.handlePlay.bind(this);
     this.handleRest = this.handleRest.bind(this);
+    this.updateHealth = this.updateHealth.bind(this);
+    this.updateHappiness = this.updateHappiness.bind(this);
+    this.updateHunger = this.updateHunger.bind(this);
 
   }
 
+  componentDidMount() {
+    this.healthUpdateTimer = setInterval(() => this.updateHealth(), 50);
+    this.happinessUpdateTimer = setInterval(() => this.updateHappiness(), 50);
+    this.hungerUpdateTimer = setInterval(() => this.updateHunger(), 50);
+
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.healthUpdateTimer);
+    clearInterval(this.happinessUpdateTimer);
+    clearInterval(this.hungerUpdateTimer);
+  }
 
   handleFeed() {
     this.setState({hunger: this.state.hunger + 5});
@@ -38,49 +53,51 @@ class Game extends React.Component {
   }
 
 
-  componentDidMount() {
-    this.waitTimeUpdateTimer = setInterval(() => {
 
+  updateHealth() {
     if (this.state.health > 50) {
       this.setState({health: this.state.health - 1})
-
-    } else if (this.state.health <= 50 && this.state.happiness > 20) {
-      this.setState({happiness: this.state.happiness - 1})
-
-    } else if (this.state.hunger > 0) {
-      this.setState({hunger: this.state.hunger - 1})
-
+      console.log(this.state);
     }
-
-  }, 5);
   }
 
+  updateHappiness() {
+    if (this.state.happiness >= 50) {
+      this.setState({health: this.state.happiness - 1})
+    }
+  }
 
-render() {
-
-  return (
-
-    <div style={appStyle}>
-
-    <div className="Feed">
-    <h4>Hunger: {this.state.hunger}</h4>
-    <button onClick={this.handleFeed}>Feed</button>
-    </div>
-
-    <div className="Play">
-    <h4>happiness: {this.state.happiness}</h4>
-    <button onClick={this.handlePlay}>Play</button>
-    </div>
-
-    <div className="Rest">
-    <h4>health: {this.state.health}</h4>
-    <button onClick={this.handleRest}>Rest</button>
-    </div>
-
-    </div>
-
-  );
+  updateHunger() {
+    if (this.state.hunger > 20) {
+      this.setState({health: this.state.hunger - 1})
+  }
 }
+
+  render() {
+
+    return (
+
+      <div style={appStyle}>
+
+        <div className="Feed">
+          <h4>Hunger: {this.state.hunger}</h4>
+          <button onClick={this.handleFeed}>Feed</button>
+        </div>
+
+        <div className="Play">
+          <h4>happiness: {this.state.happiness}</h4>
+          <button onClick={this.handlePlay}>Play</button>
+        </div>
+
+        <div className="Rest">
+          <h4>health: {this.state.health}</h4>
+          <button onClick={this.handleRest}>Rest</button>
+        </div>
+
+      </div>
+
+    );
+  }
 }
 
 export default Game;
