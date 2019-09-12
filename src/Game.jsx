@@ -13,7 +13,8 @@ class Game extends React.Component {
     this.state = {
       hunger: 50,
       happiness: 50,
-      health: 50
+      health: 100,
+      status: 'alive'
 
     };
 
@@ -27,9 +28,9 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
-    this.healthUpdateTimer = setInterval(() => this.updateHealth(), 50);
-    this.happinessUpdateTimer = setInterval(() => this.updateHappiness(), 50);
-    this.hungerUpdateTimer = setInterval(() => this.updateHunger(), 50);
+    this.healthUpdateTimer = setInterval(() => this.updateHealth(), 100);
+    this.happinessUpdateTimer = setInterval(() => this.updateHappiness(), 100);
+    this.hungerUpdateTimer = setInterval(() => this.updateHunger(), 100);
 
   }
 
@@ -55,21 +56,26 @@ class Game extends React.Component {
 
 
   updateHealth() {
-    if (this.state.health > 50) {
+    if (this.state.health >= 0) {
       this.setState({health: this.state.health - 1})
       console.log(this.state);
-    }
+      console.log("hello world");
+    } if (this.state.health < 0) {
+      this.setState({status: this.state.status = 'dead'})
+      console.log(this.state);
+    this.componentWillUnmount();
+  }
   }
 
   updateHappiness() {
-    if (this.state.happiness >= 50) {
-      this.setState({health: this.state.happiness - 1})
+    if (this.state.happiness > 0) {
+      this.setState({happiness: this.state.happiness - 1})
     }
   }
 
   updateHunger() {
-    if (this.state.hunger > 20) {
-      this.setState({health: this.state.hunger - 1})
+    if (this.state.hunger > 0) {
+      this.setState({hunger: this.state.hunger - 1})
   }
 }
 
@@ -85,13 +91,17 @@ class Game extends React.Component {
         </div>
 
         <div className="Play">
-          <h4>happiness: {this.state.happiness}</h4>
+          <h4>Happiness: {this.state.happiness}</h4>
           <button onClick={this.handlePlay}>Play</button>
         </div>
 
         <div className="Rest">
-          <h4>health: {this.state.health}</h4>
+          <h4>Health: {this.state.health}</h4>
           <button onClick={this.handleRest}>Rest</button>
+        </div>
+
+        <div className="Rest">
+          <h4>Status: {this.state.status}</h4>
         </div>
 
       </div>
