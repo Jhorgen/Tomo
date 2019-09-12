@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter, Link } from 'react-router-dom';
 import IntroPage from './components/Intro'
+import Bar from './components/Bar'
 
 var appStyle = {
-  backgroundColor: 'coral'
+  backgroundColor: 'lightcoral'
 }
 
 class Game extends React.Component {
@@ -85,24 +86,31 @@ class Game extends React.Component {
 
       <div style={appStyle}>
 
-        <div className="Feed">
+
+            <div className="Feed">
           <h4>Hunger: {this.state.hunger}</h4>
           <button onClick={this.handleFeed}>Feed</button>
+          <meter low={5} value={this.state.hunger + ''} min='0' max='50'></meter>
         </div>
 
         <div className="Play">
           <h4>Happiness: {this.state.happiness}</h4>
           <button onClick={this.handlePlay}>Play</button>
+          <meter low={5} value={this.state.happiness + ''} min='0' max='50'></meter>
         </div>
 
         <div className="Rest">
           <h4>Health: {this.state.health}</h4>
           <button onClick={this.handleRest}>Rest</button>
+          <meter low={5} value={this.state.health + ''} min='0' max='100'></meter>
         </div>
 
         <div className="Rest">
           <h4>Status: {this.state.status}</h4>
         </div>
+
+
+
 
       </div>
 

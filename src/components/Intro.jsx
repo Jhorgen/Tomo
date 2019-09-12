@@ -1,19 +1,23 @@
 import React from 'react';
 import { Image } from 'react-bootstrap'
-import IntroLogo from '../assets/intro.png'
+import introLogo from '../assets/intro.png'
 import { Link } from 'react-router-dom';
 
+
 function IntroPage(){
-  var myStyle = {
-    marginLeft: 'auto',
-    marginRight: 'auto'
-  }
+
   return (
     <div>
+    <div className="landing">
     <Link to='/tomo'>
-    <Image style={myStyle} src={IntroLogo} rounded />
+    <img src={introLogo} rounded />
     </Link>
+    </div>
+    <div className="tomo">
     <h1>Tomo</h1>
+    </div>
+
+
     </div>
   );
 }

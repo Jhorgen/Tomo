@@ -1,14 +1,32 @@
-.container {
-    margin: auto;
-    text-align: center;
-    max-width: 600px;
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Titan+One&display=swap');
 
-    &__image {
-        width: 100px;
-        height: auto;
-    }
+
+.landing {
+  text-align: center;
+  animation: wiggle 1.5s infinite;
 }
 
-.left {
-    text-align: left;
+@keyframes wiggle {
+    0% { transform: rotate(0deg); }
+   80% { transform: rotate(0deg); }
+   85% { transform: rotate(5deg); }
+   95% { transform: rotate(-5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.tomo {
+  font-family: 'Titan One', cursive;
+  font-size: 15px;
+  text-shadow: 4px 4px 4px grey;
+  color: red;
+  text-align: center;
+}
+
+meter {
+  text-align: center;
+  margin-left: 30px;
+  width: 150px;
+  border-radius: 45px;
+  background-color: blue;
 }
