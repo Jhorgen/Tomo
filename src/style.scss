@@ -37,3 +37,30 @@ button {
   border-radius: 25px;
   font-size: 25px;
 }
+
+h4 {
+  font-size: 23px;
+  font-weight: bold;
+  text-shadow: 0.5px 1px 4px grey;
+  text-align: left;
+}
+
+.statusSymbol {
+  font-size: 26px;
+}
+
+.Status {
+  background-color: coral;
+  text-align: center;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid lightcoral;
+  margin-top: 15px;
+  text-shadow: 4px 1px 4px grey;
+}
+
+.header {
+  text-align: center;
+  font-size: 30px;
+  text-shadow: 2px 2px 2px grey;
+}
