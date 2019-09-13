@@ -2,9 +2,24 @@ import React from 'react';
 import { BrowserRouter, Link } from 'react-router-dom';
 import IntroPage from './components/Intro'
 import Bar from './components/Bar'
+import alive from './assets/alive.png'
+import dead from './assets/dead.png'
+
 
 var appStyle = {
   backgroundColor: 'lightcoral'
+}
+
+var style= {
+  textAlign: 'center',
+  height: '300px',
+  width: '300px',
+  float: 'right',
+  marginRight: '200px'
+}
+
+var h1= {
+  textAlign: 'center  '
 }
 
 class Game extends React.Component {
@@ -15,7 +30,7 @@ class Game extends React.Component {
       hunger: 50,
       happiness: 50,
       health: 100,
-      status: 'alive'
+      status: 'Alive'
 
     };
 
@@ -29,9 +44,9 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
-    this.healthUpdateTimer = setInterval(() => this.updateHealth(), 100);
-    this.happinessUpdateTimer = setInterval(() => this.updateHappiness(), 100);
-    this.hungerUpdateTimer = setInterval(() => this.updateHunger(), 100);
+    this.healthUpdateTimer = setInterval(() => this.updateHealth(), 20);
+    this.happinessUpdateTimer = setInterval(() => this.updateHappiness(), 1000);
+    this.hungerUpdateTimer = setInterval(() => this.updateHunger(), 1000);
 
   }
 
@@ -62,10 +77,10 @@ class Game extends React.Component {
       console.log(this.state);
       console.log("hello world");
     } if (this.state.health < 0) {
-      this.setState({status: this.state.status = 'dead'})
+      this.setState({status: this.state.status = 'Dead'})
       console.log(this.state);
-    this.componentWillUnmount();
-  }
+      this.componentWillUnmount();
+    }
   }
 
   updateHappiness() {
@@ -77,21 +92,43 @@ class Game extends React.Component {
   updateHunger() {
     if (this.state.hunger > 0) {
       this.setState({hunger: this.state.hunger - 1})
+    }
+
   }
-}
+
+
 
   render() {
+    let imageToRender = null;
+    if (this.state.status === 'Alive') {
+      imageToRender = <img style={style} src={alive} alt='tamagotchi'></img>
+    }
+
+    if (this.state.status === 'Dead') {
+      imageToRender = <img style={style} src={dead} alt='tamagotchi'></img>
+    }
 
     return (
 
       <div style={appStyle}>
+        <h1 style={h1}>Test</h1>
+        {imageToRender}
 
 
-            <div className="Feed">
+
+
+        <div className="Rest">
+          <h4>Health: {this.state.health}</h4>
+          <button onClick={this.handleRest}>Rest</button>
+          <meter low={5} value={this.state.health + ''} min='0' low='50' max='100'></meter>
+        </div>
+
+        <div className="Feed">
           <h4>Hunger: {this.state.hunger}</h4>
           <button onClick={this.handleFeed}>Feed</button>
           <meter low={5} value={this.state.hunger + ''} min='0' max='50'></meter>
         </div>
+
 
         <div className="Play">
           <h4>Happiness: {this.state.happiness}</h4>
@@ -99,15 +136,12 @@ class Game extends React.Component {
           <meter low={5} value={this.state.happiness + ''} min='0' max='50'></meter>
         </div>
 
-        <div className="Rest">
-          <h4>Health: {this.state.health}</h4>
-          <button onClick={this.handleRest}>Rest</button>
-          <meter low={5} value={this.state.health + ''} min='0' max='100'></meter>
-        </div>
 
         <div className="Rest">
           <h4>Status: {this.state.status}</h4>
         </div>
+
+
 
 
 
