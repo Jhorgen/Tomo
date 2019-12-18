@@ -33,7 +33,8 @@ class Game extends React.Component {
       hunger: 50,
       happiness: 50,
       health: 100,
-      status: 'Alive'
+      status: 'Alive',
+      yoda: ''
     };
     this.handleFeed = this.handleFeed.bind(this);
     this.handlePlay = this.handlePlay.bind(this);
@@ -44,9 +45,12 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
-    this.healthUpdateTimer = setInterval(() => this.updateHealth(), 20);
-    this.happinessUpdateTimer = setInterval(() => this.updateHappiness(), 1000);
-    this.hungerUpdateTimer = setInterval(() => this.updateHunger(), 1000);
+    console.log(this.state.yoda);
+    this.healthUpdateTimer = setInterval(() => this.updateHealth(), 2000);
+    this.happinessUpdateTimer = setInterval(() => this.updateHappiness(), 2500);
+    this.hungerUpdateTimer = setInterval(() => this.updateHunger(), 2500);
+
+    console.log("tomo name child:", this.props.location.state.tomoName);
 
   }
 
@@ -94,6 +98,7 @@ class Game extends React.Component {
 
   }
 
+
   render() {
 
     let imageToRender = null;
@@ -105,10 +110,10 @@ class Game extends React.Component {
       imageToRender = <img style={style} src={dead} alt='tamagotchi'></img>
     }
 
+
     return (
       <div style={appStyle}>
-
-        <h1 className='header'>Test</h1>
+        <h1 className='header' onClick={() => this.nameTest()}>{this.props.location.state.tomoName}</h1>
         <div style={stats}>
 
           <div className="Rest">
