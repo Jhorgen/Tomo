@@ -34,7 +34,6 @@ class Game extends React.Component {
       happiness: 50,
       health: 100,
       status: 'Alive',
-      yoda: ''
     };
     this.handleFeed = this.handleFeed.bind(this);
     this.handlePlay = this.handlePlay.bind(this);
@@ -45,13 +44,9 @@ class Game extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.state.yoda);
     this.healthUpdateTimer = setInterval(() => this.updateHealth(), 2000);
     this.happinessUpdateTimer = setInterval(() => this.updateHappiness(), 2500);
     this.hungerUpdateTimer = setInterval(() => this.updateHunger(), 2500);
-
-    console.log("tomo name child:", this.props.location.state.tomoName);
-
   }
 
   componentWillUnmount() {
@@ -76,11 +71,8 @@ class Game extends React.Component {
   updateHealth() {
     if (this.state.health >= 0) {
       this.setState({health: this.state.health - 1})
-      console.log(this.state);
-      console.log("hello world");
     } if (this.state.health < 0) {
       this.setState({status: this.state.status = 'Dead'})
-      console.log(this.state);
       this.componentWillUnmount();
     }
   }
@@ -95,7 +87,6 @@ class Game extends React.Component {
     if (this.state.hunger > 0) {
       this.setState({hunger: this.state.hunger - 1})
     }
-
   }
 
 
@@ -113,7 +104,7 @@ class Game extends React.Component {
 
     return (
       <div style={appStyle}>
-        <h1 className='header' onClick={() => this.nameTest()}>{this.props.location.state.tomoName}</h1>
+        <h1 className='header'}>{this.props.location.state.tomoName}</h1>
         <div style={stats}>
 
           <div className="Rest">
@@ -133,15 +124,13 @@ class Game extends React.Component {
             <button onClick={this.handlePlay}>Play</button>
             <meter low={5} value={this.state.happiness + ''} min='0' max='50'></meter>
           </div>
-
-
         </div>
 
         <div style={imgStyle}>
           <h1></h1>
         {imageToRender}
       </div>
-
+      
         <div className="Status">
           <h1 className='statusSymbol'>Status: {this.state.status}</h1>
         </div>
