@@ -1,7 +1,6 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { BrowserRouter, Link } from 'react-router-dom';
 import IntroPage from './components/Intro'
-import Bar from './components/Bar'
 import alive from './assets/alive.png'
 import dead from './assets/dead.png'
 
@@ -25,7 +24,7 @@ var stats = {
   padding: '70px'
 }
 
-class Game extends React.Component {
+class Game extends Component {
 
   constructor(props) {
     super(props);
@@ -104,7 +103,7 @@ class Game extends React.Component {
 
     return (
       <div style={appStyle}>
-        <h1 className='header'}>{this.props.location.state.tomoName}</h1>
+        <h1 className='header'>{this.props.location.state.tomoName}</h1>
         <div style={stats}>
 
           <div className="Rest">
@@ -130,7 +129,7 @@ class Game extends React.Component {
           <h1></h1>
         {imageToRender}
       </div>
-      
+
         <div className="Status">
           <h1 className='statusSymbol'>Status: {this.state.status}</h1>
         </div>
@@ -139,6 +138,6 @@ class Game extends React.Component {
 
     );
   }
-}
+  }
 
 export default Game;

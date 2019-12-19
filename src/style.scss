@@ -64,3 +64,12 @@ h4 {
   font-size: 30px;
   text-shadow: 2px 2px 2px grey;
 }
+
+.create-tomo-button {
+  color: black;
+}
+
+.create-tomo-button:hover {
+  transition: 0.3s ease;
+  font-size: 1.3rem;
+}
