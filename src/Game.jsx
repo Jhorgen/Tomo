@@ -84,7 +84,7 @@ class Game extends Component {
   updateHealth = () => {
     if (this.state.health >= 0) {
       this.setState({health: this.state.health - 1})
-    } if (this.state.health < 0) {
+    } if (this.state.health <= 0) {
       this.setState({status: this.state.status = 'Dead'})
       this.componentWillUnmount();
     }
@@ -93,12 +93,18 @@ class Game extends Component {
   updateHappiness = () => {
     if (this.state.happiness > 0) {
       this.setState({happiness: this.state.happiness - 1})
+    } if (this.state.happiness <= 0) {
+      this.setState({status: this.state.status = 'Dead'})
+      this.componentWillUnmount();
     }
   }
 
   updateHunger = () => {
     if (this.state.hunger > 0) {
       this.setState({hunger: this.state.hunger - 1})
+    } if (this.state.hunger <= 0) {
+      this.setState({status: this.state.status = 'Dead'})
+      this.componentWillUnmount();
     }
   }
 
