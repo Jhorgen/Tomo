@@ -33,16 +33,12 @@ class Game extends Component {
       happiness: 50,
       health: 100,
       status: 'Alive',
+      level: 0
     };
-    this.handleFeed = this.handleFeed.bind(this);
-    this.handlePlay = this.handlePlay.bind(this);
-    this.handleRest = this.handleRest.bind(this);
-    this.updateHealth = this.updateHealth.bind(this);
-    this.updateHappiness = this.updateHappiness.bind(this);
-    this.updateHunger = this.updateHunger.bind(this);
   }
 
   componentDidMount() {
+    this.handleLevelTimer = setInterval(() => this.handleLevel(), 10000)
     this.healthUpdateTimer = setInterval(() => this.updateHealth(), 2000);
     this.happinessUpdateTimer = setInterval(() => this.updateHappiness(), 2500);
     this.hungerUpdateTimer = setInterval(() => this.updateHunger(), 2500);
@@ -54,7 +50,13 @@ class Game extends Component {
     clearInterval(this.hungerUpdateTimer);
   }
 
-  handleFeed() {
+  handleLevel = () => {
+   this.setState({level: this.state.level + 1})
+   console.log('test');
+   console.log(this.state.level);
+  }
+
+  handleFeed = () => {
     if(this.state.hunger < 35) {
     this.setState({hunger: this.state.hunger + 5});
   } else if(this.state.hunger > 45) {
@@ -63,7 +65,7 @@ class Game extends Component {
   }
 
 
-  handlePlay() {
+  handlePlay = () => {
     if(this.state.happiness < 35) {
     this.setState({happiness: this.state.happiness + 1});
   } else if(this.state.happiness > 45) {
@@ -71,7 +73,7 @@ class Game extends Component {
   }
   }
 
-  handleRest() {
+  handleRest = () => {
     if(this.state.health < 85) {
     this.setState({health: this.state.health + 15});
   } else if(this.state.health > 85) {
@@ -79,7 +81,7 @@ class Game extends Component {
   }
   }
 
-  updateHealth() {
+  updateHealth = () => {
     if (this.state.health >= 0) {
       this.setState({health: this.state.health - 1})
     } if (this.state.health < 0) {
@@ -88,13 +90,13 @@ class Game extends Component {
     }
   }
 
-  updateHappiness() {
+  updateHappiness = () => {
     if (this.state.happiness > 0) {
       this.setState({happiness: this.state.happiness - 1})
     }
   }
 
-  updateHunger() {
+  updateHunger = () => {
     if (this.state.hunger > 0) {
       this.setState({hunger: this.state.hunger - 1})
     }
@@ -115,7 +117,10 @@ class Game extends Component {
 
     return (
       <div style={appStyle}>
-        <h1 className='header'>{this.props.location.state.tomoName}</h1>
+        <div style={{ background: 'coral', border: '.4px solid black', borderRadius: '5px'}}>
+        <h1 className='header' style={{marginTop: '.5rem'}}>{this.props.location.state.tomoName}</h1>
+        <h3 style={{textAlign: 'center'}}>Level: {this.state.level}</h3>
+        </div>
         <div style={stats}>
 
           <div className="Rest">
