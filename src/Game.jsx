@@ -55,16 +55,28 @@ class Game extends Component {
   }
 
   handleFeed() {
+    if(this.state.hunger < 35) {
     this.setState({hunger: this.state.hunger + 5});
+  } else if(this.state.hunger > 45) {
+    this.setState({hunger: 50})
+  }
   }
 
 
   handlePlay() {
+    if(this.state.happiness < 35) {
     this.setState({happiness: this.state.happiness + 1});
+  } else if(this.state.happiness > 45) {
+    this.setState({happiness: 50});
+  }
   }
 
   handleRest() {
+    if(this.state.health < 85) {
     this.setState({health: this.state.health + 15});
+  } else if(this.state.health > 85) {
+    this.setState({health: 100});
+  }
   }
 
   updateHealth() {

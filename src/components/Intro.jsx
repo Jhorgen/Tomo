@@ -36,7 +36,7 @@ class IntroPage extends Component {
   handleNameInput = (e) => {
     this.setState({[e.target.name]: e.target.value});
     if(this.state.tomoName.length >= 1){
-      this.setState({createNameButton: <button>Start</button>})
+      this.setState({createNameButton: <Button color="info">Create tomo</Button>})
     }
   }
 
@@ -45,12 +45,7 @@ const { tomoForm } = this.state;
     return(
       <div>
         <div className='landing'>
-          <Link to={{
-                  pathname: "/tomo",
-                  state: { tomoName: this.state.tomoNameProp }
-                }}>
             <img src={introLogo} rounded />
-          </Link>
         </div>
         <div className='tomo'>
           <h1>Tomo</h1>
