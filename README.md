@@ -20,9 +20,8 @@ $npm start
 
 ## Built With
 
-* [React](https://reactjs.org/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [React](https://reactjs.org/)
+* [Simple-react-app](https://www.npmjs.com/package/simple-react-app)
 
 ## Authors
 
