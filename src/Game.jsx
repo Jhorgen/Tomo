@@ -33,13 +33,14 @@ class Game extends Component {
       happiness: 50,
       health: 100,
       status: 'Alive',
-      level: 0
+      level: 0,
+      buttonDisplay: ''
     };
   }
 
   componentDidMount() {
     this.handleLevelTimer = setInterval(() => this.handleLevel(), 10000)
-    this.healthUpdateTimer = setInterval(() => this.updateHealth(), 2000);
+    this.healthUpdateTimer = setInterval(() => this.updateHealth(), 20);
     this.happinessUpdateTimer = setInterval(() => this.updateHappiness(), 2500);
     this.hungerUpdateTimer = setInterval(() => this.updateHunger(), 2500);
   }
@@ -57,18 +58,18 @@ class Game extends Component {
   }
 
   handleFeed = () => {
-    if(this.state.hunger < 35) {
+    if(this.state.hunger <= 35) {
     this.setState({hunger: this.state.hunger + 5});
-  } else if(this.state.hunger > 45) {
+  } else if(this.state.hunger >= 40) {
     this.setState({hunger: 50})
   }
   }
 
 
   handlePlay = () => {
-    if(this.state.happiness < 35) {
-    this.setState({happiness: this.state.happiness + 1});
-  } else if(this.state.happiness > 45) {
+    if(this.state.happiness <= 35) {
+    this.setState({happiness: this.state.happiness + 5});
+  } else if(this.state.happiness >= 40) {
     this.setState({happiness: 50});
   }
   }
@@ -85,7 +86,7 @@ class Game extends Component {
     if (this.state.health >= 0) {
       this.setState({health: this.state.health - 1})
     } if (this.state.health <= 0) {
-      this.setState({status: this.state.status = 'Dead'})
+      this.setState({status: 'Dead', buttonDisplay: 'none', hunger: 0, happiness: 0})
       this.componentWillUnmount();
     }
   }
@@ -94,7 +95,7 @@ class Game extends Component {
     if (this.state.happiness > 0) {
       this.setState({happiness: this.state.happiness - 1})
     } if (this.state.happiness <= 0) {
-      this.setState({status: this.state.status = 'Dead'})
+      this.setState({status: 'Dead', buttonDisplay: 'none', health: 0, hunger: 0})
       this.componentWillUnmount();
     }
   }
@@ -103,7 +104,7 @@ class Game extends Component {
     if (this.state.hunger > 0) {
       this.setState({hunger: this.state.hunger - 1})
     } if (this.state.hunger <= 0) {
-      this.setState({status: this.state.status = 'Dead'})
+      this.setState({status: 'Dead', buttonDisplay: 'none', happiness: 0, health: 0})
       this.componentWillUnmount();
     }
   }
@@ -131,19 +132,19 @@ class Game extends Component {
 
           <div className="Rest">
             <h4>Health: {this.state.health}</h4>
-            <button onClick={this.handleRest}>Rest</button>
+            <button style={{display: this.state.buttonDisplay}} onClick={this.handleRest}>Rest</button>
             <meter low={5} value={this.state.health + ''} min='0' low='50' max='100'></meter>
           </div>
 
           <div className="Feed">
             <h4>Hunger: {this.state.hunger}</h4>
-            <button onClick={this.handleFeed}>Feed</button>
+            <button style={{display: this.state.buttonDisplay}} onClick={this.handleFeed}>Feed</button>
             <meter low={5} value={this.state.hunger + ''} min='0' max='50'></meter>
           </div>
 
           <div className="Play">
             <h4>Happiness: {this.state.happiness}</h4>
-            <button onClick={this.handlePlay}>Play</button>
+            <button style={{display: this.state.buttonDisplay}} onClick={this.handlePlay}>Play</button>
             <meter low={5} value={this.state.happiness + ''} min='0' max='50'></meter>
           </div>
         </div>
