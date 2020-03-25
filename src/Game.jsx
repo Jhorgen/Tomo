@@ -40,7 +40,7 @@ class Game extends Component {
 
   componentDidMount() {
     this.handleLevelTimer = setInterval(() => this.handleLevel(), 10000)
-    this.healthUpdateTimer = setInterval(() => this.updateHealth(), 20);
+    this.healthUpdateTimer = setInterval(() => this.updateHealth(), 600);
     this.happinessUpdateTimer = setInterval(() => this.updateHappiness(), 2500);
     this.hungerUpdateTimer = setInterval(() => this.updateHunger(), 2500);
   }
